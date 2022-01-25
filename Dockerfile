@@ -1,11 +1,13 @@
 FROM centos:7
 ENV container=docker
 
-ENV pip_packages "ansible selinux"
+ENV pip_packages "ansible==4.10.0 selinux"
 
 
 COPY CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo
 
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN echo 'Asia/Shanghai' >/etc/timezone
 
 RUN mkdir /root/.pip
 COPY pip.conf /root/.pip/pip.conf
@@ -42,7 +44,7 @@ RUN yum makecache fast \
 
 
 # Install Ansible via Pip.
-RUN pip install --upgrade "pip < 21.0"
+RUN pip install --upgrade "pip==20.3.4"
 
 
 # Install Ansible via Pip.
