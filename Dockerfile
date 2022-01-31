@@ -1,7 +1,7 @@
 FROM centos:7
 ENV container=docker
 
-ENV pip_packages "ansible==4.10.0 selinux"
+ENV pip_packages "ansible selinux"
 
 
 COPY CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo
@@ -44,8 +44,8 @@ RUN yum makecache fast \
 
 
 # Install Ansible via Pip.
-RUN pip install --upgrade "pip==20.3.4"
-
+RUN pip install --upgrade "pip==20.3" \
+ && pip install -U setuptools
 
 # Install Ansible via Pip.
 RUN pip install $pip_packages
